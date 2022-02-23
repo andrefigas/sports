@@ -11,7 +11,11 @@ class EventListPresenterImpl(app: App) : EventListPresenterContract {
     lateinit var model: EventsListModelContract
 
     init {
-        DaggerEventListModelComponent.builder().endpoints(app.endPoints).build().inject(this)
+        DaggerEventListModelComponent.builder()
+            .endpoints(app.endPoints)
+            .eventsDAO(app.eventsDAOContract)
+            .build()
+            .inject(this)
     }
 
     override fun provideEvents() = model.provideCategories()
