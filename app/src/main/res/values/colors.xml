@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="green">#8BC34A</color>
+    <color name="green_dark">#384C1F</color>
+
     <color name="foot">#8BC34A</color>
     <color name="foot_dark">#384C1F</color>
 
