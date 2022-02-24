@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Single
 
 
 /**
- * @param context was included because usually db libraries requires context
+ * @param context was included because usually data persistence libraries requires context
  */
 class EventsDAOImpl(private val context: Context) : EventsDAOContract {
 

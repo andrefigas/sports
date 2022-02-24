@@ -19,7 +19,7 @@ class AppModule {
     }
 
     @Provides
-    fun provideApi() = Retrofit.Builder()
+    fun provideApi(): EndPoints = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()))
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .baseUrl(URL).build().create(EndPoints::class.java)

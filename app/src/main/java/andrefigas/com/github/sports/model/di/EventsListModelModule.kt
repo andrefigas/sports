@@ -11,6 +11,6 @@ import dagger.Provides
 class EventsListModelModule {
 
     @Provides
-    fun provideModel(endPoints: EndPoints, eventsDAOContract: EventsDAOContract): EventsListModelContract = EventsListModelImpl(endPoints, eventsDAOContract)
+    fun provideModel(endPoints: EndPoints, eventsDAOContract: EventsDAOContract): EventsListModelContract = EventsListModelImpl(endPoints,  eventsDAOContract)
 
 }

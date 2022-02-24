@@ -12,5 +12,7 @@ data class Category(
     val description : String,
     @Expose
     @SerializedName("e")
-    val events : List<Event>
+    var events : List<Event>,
+    var collapsed: Boolean = false,
+    var imageUrl : String = ""
 )

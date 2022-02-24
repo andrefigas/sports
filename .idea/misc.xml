@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ITS/Sports/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/ITS/Sports/app/src/main/res/layout/event_category.xml" value="0.33" />
+        <entry key="..\:/ITS/Sports/app/src/main/res/layout/event_item.xml" value="0.33" />
       </map>
     </option>
   </component>
