@@ -2,6 +2,8 @@ package andrefigas.com.github.sports.view
 
 import andrefigas.com.github.sports.model.entities.Category
 import android.view.View
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.event_category.view.*
 
 
@@ -16,6 +18,8 @@ class CategoryViewHolder(val listener: EventAdapterListener, itemView: View) :
             category.collapsed = !category.collapsed
             listener.onCategoryToggled(category)
         }
+
+        (itemView as CardView).setCardBackgroundColor(ContextCompat.getColor(itemView.context, CategoryDesignUtils.getDarkColorByCategoryId(category.id)))
     }
 
 }

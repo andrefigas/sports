@@ -12,10 +12,13 @@ class Event(
     private val teamsStr: String,
     @Expose
     @SerializedName("tt")
-    private val time: Long,
+    val time: Long,
+    @Expose
+    @SerializedName("si")
+    val categoryID: String,
     var favorites : Boolean = false){
     companion object{
-        const val SEPARATOR = "-"
+        const val SEPARATOR = " - "
     }
 
     val teams : List<String>

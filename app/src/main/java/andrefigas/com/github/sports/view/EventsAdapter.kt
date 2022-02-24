@@ -48,19 +48,22 @@ class EventsAdapter(val presenter : EventListPresenterContract,
 
     override fun onViewAttachedToWindow(holder: BaseHolder<*>) {
         super.onViewAttachedToWindow(holder)
-        val data = getDataToBind(holder.adapterPosition)
         when (holder) {
-            is CategoryViewHolder -> {
-                holder.bind(data as Category)
-            }
             is EventViewHolder -> {
-                holder.bind(data as Event)
+                holder.turnOnCountDown()
             }
         }
     }
 
+
+
     override fun onViewDetachedFromWindow(holder: BaseHolder<*>) {
         super.onViewDetachedFromWindow(holder)
+        when (holder) {
+            is EventViewHolder -> {
+                holder.turnOffCountDown()
+            }
+        }
     }
 
     override fun onCategoryToggled(category: Category) {

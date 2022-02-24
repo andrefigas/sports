@@ -2,39 +2,57 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
+    android:minHeight="200dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/starts_in"
             android:scaleType="centerInside"
-            android:id="@+id/iv_event_item_logo"
+            android:id="@+id/tv_event_item_starts_in"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:textSize="18sp"
+            android:id="@+id/tv_event_item_counter"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_event_item_starts_in"
+            tools:text="@string/seconds" />
 
         <Switch
             android:id="@+id/sw_event_item_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintBottom_toBottomOf="@+id/tv_event_item_starts_in"
             app:layout_constraintRight_toRightOf="parent"
-           />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textSize="16sp"
             android:id="@+id/tv_event_item_teams"
             android:lineSpacingExtra="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/iv_event_item_logo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_event_item_counter"
             app:layout_constraintBottom_toBottomOf="parent"
             android:gravity="center"
             tools:text="Team1\nTeam2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-
+            android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

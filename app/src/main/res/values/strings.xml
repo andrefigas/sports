@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Sports</string>
+    <string name="starts_in">Starts in</string>
+    <string name="done">done</string>
+    <string name="now">now</string>
+    <string name="years">%d years</string>
+    <string name="months">%d months</string>
+    <string name="days">%d days</string>
+    <string name="hours">%d hours</string>
+    <string name="minutes">%d minutes</string>
+    <string name="seconds">%d minutes</string>
+    <string name="teams_separator">VS</string>
 </resources>
