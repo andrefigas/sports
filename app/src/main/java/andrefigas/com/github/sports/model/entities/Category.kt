@@ -13,6 +13,5 @@ data class Category(
     @Expose
     @SerializedName("e")
     var events: List<Event>,
-    var collapsed: Boolean = false,
-    var imageUrl: String = ""
+    var collapsed: Boolean = false
 )

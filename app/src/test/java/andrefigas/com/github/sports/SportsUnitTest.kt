@@ -4,69 +4,47 @@ import andrefigas.com.github.sports.model.entities.Category
 import andrefigas.com.github.sports.presenter.EventListPresenterContract
 import andrefigas.com.github.sports.presenter.di.DaggerEventListTestPresenterComponent
 import andrefigas.com.github.sports.singleton.AppTest
-import androidx.annotation.NonNull
-import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
-import io.reactivex.rxjava3.core.Scheduler
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.internal.schedulers.ExecutorScheduler
 import io.reactivex.rxjava3.observers.TestObserver
-import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import org.junit.Before
 import org.junit.Test
-import java.util.concurrent.Executor
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SportsUnitTest{
+class SportsUnitTest {
 
-    companion object{
+    companion object {
         const val SOCCER_DESCRIPTION = "SOCCER"
-    }
+        const val SOCCER_ID = "FOOT"
 
-    fun setUpRxSchedulers() {
-
-        val immediate: Scheduler = object : Scheduler() {
-            override fun scheduleDirect(
-                @NonNull run: Runnable,
-                delay: Long,
-                @NonNull unit: TimeUnit
-            ): Disposable {
-                return super.scheduleDirect(run, 0, unit)
-            }
-
-            override fun createWorker(): Worker {
-                return ExecutorScheduler.ExecutorWorker(
-                    Executor { obj: Runnable -> obj.run() },
-                    true, false
-                )
-            }
-        }
-        RxJavaPlugins.setInitIoSchedulerHandler { immediate }
-        RxJavaPlugins.setInitComputationSchedulerHandler { immediate }
-        RxJavaPlugins.setInitNewThreadSchedulerHandler { immediate }
-        RxJavaPlugins.setInitSingleSchedulerHandler { immediate }
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler { immediate }
+        const val SOCCER_FIRST_EVENT_ID = 24456069
+        const val SOCCER_FIRST_EVENT_TEAM_1 = "Medeama SC"
+        const val SOCCER_FIRST_EVENT_TEAM_2 = "Dreams FC"
+        const val SOCCER_FIRST_EVENT_TIME = 1668925680L
     }
 
 
     @Inject
-    lateinit var presenter : EventListPresenterContract
+    lateinit var presenter: EventListPresenterContract
 
     @Before
     fun setup() {
         AppTest.setup()
         DaggerEventListTestPresenterComponent.builder().base(AppTest.INSTANCE).build().inject(this)
-        setUpRxSchedulers()
+
     }
 
     @Test
-    fun validateList() {
+    fun validateCategory() {
 
         val testObserver = TestObserver<List<Category>>()
         presenter.provideEvents().subscribe(testObserver)
 
-        testObserver.await().assertValue{ categories ->
-            categories[0].description == SOCCER_DESCRIPTION
+        testObserver.await().assertValue { categories ->
+            categories[0].id == SOCCER_ID &&
+                    categories[0].description == SOCCER_DESCRIPTION &&
+                    categories[0].events[0].id == SOCCER_FIRST_EVENT_ID &&
+                    categories[0].events[0].time == SOCCER_FIRST_EVENT_TIME &&
+                    categories[0].events[0].teams[0] == SOCCER_FIRST_EVENT_TEAM_1 &&
+                    categories[0].events[0].teams[1] == SOCCER_FIRST_EVENT_TEAM_2
         }
     }
 }
