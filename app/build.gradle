@@ -71,7 +71,11 @@ dependencies {
     kaptTest "com.google.dagger:dagger-compiler:2.35.1"
     kaptAndroidTest "com.google.dagger:dagger- compiler:2.35.1"
 
+    androidTestImplementation 'androidx.test:annotation 1.0.0'
 
+    androidTestImplementation 'com.android.support.test:runner:1.4.0'
+    androidTestImplementation 'com.android.support.test:rules:1.4.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.4.0'
 
 }
 

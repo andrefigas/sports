@@ -6,12 +6,15 @@ import andrefigas.com.github.sports.presenter.di.DaggerEventListPresenterCompone
 import andrefigas.com.github.sports.singleton.App
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,17 +34,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepareList() {
-        val columns = 2
-        val layoutManager = GridLayoutManager(this, columns)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (rv_main_content.adapter?.getItemViewType(position) == EventsAdapter.TYPE_CATEGORY) {
-                    columns
-                } else 1
-            }
-        }
 
-        rv_main_content.layoutManager = layoutManager
+        rv_main_content.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+
+            override fun onGlobalLayout() {
+                rv_main_content.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                //list's width / item's width
+                val columns = (rv_main_content.width.toFloat()
+                        / (resources.getDimensionPixelSize(R.dimen.item_width) ).toFloat()).toInt()
+
+                val layoutManager = GridLayoutManager(this@MainActivity, columns)
+                layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return if (rv_main_content.adapter?.getItemViewType(position) == EventsAdapter.TYPE_CATEGORY) {
+                            columns
+                        } else 1
+                    }
+                }
+
+                rv_main_content.layoutManager = layoutManager
+            }
+        })
+
+
     }
 
     private fun showErrorDialog() {
