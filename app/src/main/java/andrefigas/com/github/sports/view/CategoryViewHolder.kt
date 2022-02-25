@@ -19,6 +19,7 @@ class CategoryViewHolder(val listener: EventAdapterListener, itemView: View) :
             listener.onCategoryToggled(category)
         }
 
+        itemView.iv_event_category_icon.setImageResource(CategoryDesignUtils.getIconByCategoryId(category.id))
         (itemView as CardView).setCardBackgroundColor(ContextCompat.getColor(itemView.context, CategoryDesignUtils.getDarkColorByCategoryId(category.id)))
     }
 

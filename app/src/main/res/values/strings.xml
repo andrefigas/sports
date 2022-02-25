@@ -10,4 +10,8 @@
     <string name="minutes">%d minutes</string>
     <string name="seconds">%d minutes</string>
     <string name="teams_separator">VS</string>
+    <string name="dialog_error_title">Sorry</string>
+    <string name="dialog_error_body">Oops, something goes wrong. </string>
+    <string name="dialog_error_try_again">Try again</string>
+    <string name="dialog_error_exit">Exit</string>
 </resources>

@@ -2,6 +2,7 @@ package andrefigas.com.github.sports.view
 
 import andrefigas.com.github.sports.R
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 
 object CategoryDesignUtils {
 
@@ -44,6 +45,22 @@ object CategoryDesignUtils {
             BCHV_ID -> R.color.bchv_dark
             BADM_ID -> R.color.badm_dark
             else -> R.color.other_dark
+        }
+    }
+
+    @DrawableRes
+    fun getIconByCategoryId(categoryId : String) : Int{
+        return when(categoryId){
+            FOOT_ID -> R.drawable.ic_foot
+            BASK_ID -> R.drawable.ic_bask
+            TENN_ID -> R.drawable.ic_tenn
+            TABL_ID -> R.drawable.ic_tabl
+            VOLL_ID -> R.drawable.ic_voll
+            ESPS_ID -> R.drawable.ic_esps
+            ICEH_ID -> R.drawable.ic_iceh
+            BCHV_ID -> R.drawable.ic_bchv
+            BADM_ID -> R.drawable.ic_badm
+            else -> R.drawable.ic_other
         }
     }
 }

@@ -4,14 +4,17 @@ import andrefigas.com.github.sports.R
 import andrefigas.com.github.sports.model.entities.Event
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.CompoundButton
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.android.synthetic.main.event_item.view.*
 
-class EventViewHolder(itemView: View) : BaseHolder<Event>(itemView) {
+class EventViewHolder(val listener: EventAdapterListener, itemView: View) : BaseHolder<Event>(itemView), CompoundButton.OnCheckedChangeListener {
 
     lateinit var event: Event;
     lateinit var countDownTimer: CountDownTimer
+    var disposable : Disposable? = null
 
     companion object{
         const val second = 1000L
@@ -25,9 +28,24 @@ class EventViewHolder(itemView: View) : BaseHolder<Event>(itemView) {
     override fun bind(event: Event){
         this.event = event
         itemView.tv_event_item_teams.text = event.teams.joinToString(separator = "\n${itemView.context.getString(R.string.teams_separator)}\n") { it }
+
+        itemView.sw_event_item_favorite.setOnCheckedChangeListener(null)
         itemView.sw_event_item_favorite.isChecked = event.favorites
+        itemView.sw_event_item_favorite.setOnCheckedChangeListener(this)
         itemView.tv_event_item_starts_in.visibility = View.VISIBLE
         (itemView as CardView).setCardBackgroundColor(ContextCompat.getColor(itemView.context, CategoryDesignUtils.getColorByCategoryId(event.categoryID)))
+    }
+
+    override fun onCheckedChanged(button: CompoundButton?, checked: Boolean) {
+        if(disposable?.isDisposed == false){
+            itemView.sw_event_item_favorite.setOnCheckedChangeListener(null)
+            itemView.sw_event_item_favorite.isChecked = !checked
+            itemView.sw_event_item_favorite.setOnCheckedChangeListener(this)
+            return
+            //cancel action and undo
+        }
+
+        disposable = listener.onEventToggled(event)
     }
 
     fun getCounterLabel(milliseconds: Long) : String{
@@ -62,6 +80,10 @@ class EventViewHolder(itemView: View) : BaseHolder<Event>(itemView) {
         }
     }
 
+    fun release(){
+        disposable?.dispose()
+    }
+
     fun turnOnCountDown(){
         countDownTimer = object : CountDownTimer(event.time * second - System.currentTimeMillis(), 1000){
             override fun onTick(miliseconts: Long) {
@@ -70,7 +92,8 @@ class EventViewHolder(itemView: View) : BaseHolder<Event>(itemView) {
             }
 
             override fun onFinish() {
-
+                itemView.tv_event_item_counter.text =  itemView.context.getString(R.string.done)
+                itemView.tv_event_item_starts_in.visibility =  View.INVISIBLE
             }
 
         }

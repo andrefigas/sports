@@ -4,10 +4,10 @@ import andrefigas.com.github.sports.R
 import andrefigas.com.github.sports.presenter.EventListPresenterContract
 import andrefigas.com.github.sports.presenter.di.DaggerEventListPresenterComponent
 import andrefigas.com.github.sports.singleton.App
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,26 +22,50 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val layoutManager = GridLayoutManager(this, 2)
+        DaggerEventListPresenterComponent.builder().application(application as App).build().inject(this)
+
+        prepareList()
+
+        requestData()
+    }
+
+    private fun prepareList(){
+        val columns = 2
+        val layoutManager = GridLayoutManager(this, columns)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return if(rv_main_content.adapter?.getItemViewType(position) == EventsAdapter.TYPE_CATEGORY){
-                    2
-                }else 1
+                return if (rv_main_content.adapter?.getItemViewType(position) == EventsAdapter.TYPE_CATEGORY) {
+                    columns
+                } else 1
             }
         }
 
         rv_main_content.layoutManager = layoutManager
+    }
 
-        DaggerEventListPresenterComponent.builder().application(application as App).build()
-            .inject(this)
-        presenter.provideEvents().doOnSuccess { categories ->
-            rv_main_content.adapter = EventsAdapter(presenter, categories)
-        }.doOnError { error ->
-            error.printStackTrace()
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    private fun showErrorDialog() {
+        AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setTitle(R.string.dialog_error_title)
+            .setMessage(R.string.dialog_error_body)
+            .setPositiveButton(
+                R.string.dialog_error_try_again
+            ) { _, _ -> requestData() }
+            .setNegativeButton(R.string.dialog_error_exit) { _, _ -> finish() }
+            .create().show()
+    }
 
+    private fun requestData() {
+        presenter.provideEvents().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { categories ->
+                    rv_main_content.adapter = EventsAdapter(presenter, categories)
+                }
+            ) {
+                it.printStackTrace()
+                showErrorDialog()
+            }
     }
 
 }

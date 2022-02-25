@@ -41,5 +41,7 @@
     <color name="other">#B7B6B8</color>
     <color name="other_dark">#494949</color>
 
+    <color name="favorite_icon_color">#F84739</color>
+
 
 </resources>

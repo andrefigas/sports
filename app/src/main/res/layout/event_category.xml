@@ -1,41 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/teal_700"
     android:layout_margin="5dp"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:padding="10dp"
+            tools:src="@drawable/ic_other"
+            android:id="@+id/iv_event_category_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:foregroundGravity="center_vertical" />
+
         <TextView
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:textSize="24sp"
-            android:gravity="center"
-            tools:text="category name"
-            android:textAllCaps="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="80dp"
-            android:layout_marginLeft="80dp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_event_category_icon"
+            app:layout_constraintRight_toLeftOf="@+id/sw_event_category_toggle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/tv_event_category_name"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="category name"/>
 
-        <Switch
+        <CheckBox
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:buttonTint="@color/white"
+            android:button="@drawable/expand_selector"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/sw_event_category_toggle"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
 
 
-    </RelativeLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>
