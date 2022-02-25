@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName
 data class Category(
     @Expose
     @SerializedName("i")
-    val id : String,
+    val id: String,
     @Expose
     @SerializedName("d")
-    val description : String,
+    val description: String,
     @Expose
     @SerializedName("e")
-    var events : List<Event>,
+    var events: List<Event>,
     var collapsed: Boolean = false,
-    var imageUrl : String = ""
+    var imageUrl: String = ""
 )

@@ -14,6 +14,7 @@ interface EventListPresenterComponent {
     interface Builder {
 
         fun build(): EventListPresenterComponent
+
         @BindsInstance
         fun application(app: App): Builder
     }

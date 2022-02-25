@@ -22,14 +22,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerEventListPresenterComponent.builder().application(application as App).build().inject(this)
+        DaggerEventListPresenterComponent.builder().application(application as App).build()
+            .inject(this)
 
         prepareList()
 
         requestData()
     }
 
-    private fun prepareList(){
+    private fun prepareList() {
         val columns = 2
         val layoutManager = GridLayoutManager(this, columns)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

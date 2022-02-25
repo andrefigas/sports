@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface EndPoints {
 
     @GET("api/sports")
-    fun provideCategories() : Single<List<Category>>
+    fun provideCategories(): Single<List<Category>>
 
 }
