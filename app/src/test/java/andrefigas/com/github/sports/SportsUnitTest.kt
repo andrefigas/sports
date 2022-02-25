@@ -1,9 +1,9 @@
 package andrefigas.com.github.sports
 
 import andrefigas.com.github.sports.model.entities.Category
-import andrefigas.com.github.sports.singleton.AppTest
 import andrefigas.com.github.sports.presenter.EventListPresenterContract
 import andrefigas.com.github.sports.presenter.di.DaggerEventListTestPresenterComponent
+import andrefigas.com.github.sports.singleton.AppTest
 import androidx.annotation.NonNull
 import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.core.Scheduler
@@ -11,10 +11,8 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.internal.schedulers.ExecutorScheduler
 import io.reactivex.rxjava3.observers.TestObserver
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
