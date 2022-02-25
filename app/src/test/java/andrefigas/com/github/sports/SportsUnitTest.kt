@@ -29,7 +29,6 @@ class SportsUnitTest {
     fun setup() {
         AppTest.setup()
         DaggerEventListTestPresenterComponent.builder().base(AppTest.INSTANCE).build().inject(this)
-
     }
 
     @Test
