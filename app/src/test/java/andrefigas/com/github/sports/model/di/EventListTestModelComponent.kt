@@ -1,8 +1,6 @@
 package andrefigas.com.github.sports.model.di
 
-import andrefigas.com.github.sports.model.dao.EventsDAOContract
 import andrefigas.com.github.sports.model.services.EndPoints
-import andrefigas.com.github.sports.presenter.EventListPresenterImpl
 import andrefigas.com.github.sports.presenter.EventListTestPresenterImpl
 import dagger.BindsInstance
 import dagger.Component
@@ -16,6 +14,7 @@ interface EventListTestModelComponent {
     interface Builder {
 
         fun build(): EventListTestModelComponent
+
         @BindsInstance
         fun endpoints(endpoints: EndPoints): Builder
     }

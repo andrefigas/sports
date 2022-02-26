@@ -6,6 +6,7 @@ import andrefigas.com.github.sports.model.entities.Event
 import andrefigas.com.github.sports.presenter.EventListPresenterContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.disposables.Disposable
@@ -100,35 +101,36 @@ class EventsAdapter(
         }
     }
 
+    @Nullable
     private fun getDataToBind(position: Int): Any? {
-        var i = 0;
+        var i = 0
         categories.forEach { category ->
             if (i == position) return category
-            i++;
+            i++
             if (!category.collapsed) {
                 category.events.forEach { event ->
                     if (i == position) return event
-                    i++;
+                    i++
                 }
             }
         }
 
-        return null;
+        return null
     }
 
     private fun getCategoryPosition(category: Category): Int {
-        var i = 0;
+        var i = 0
         categories.forEach { cat ->
             if (category.id == cat.id) return i
-            i++;
+            i++
             if (!cat.collapsed) {
-                cat.events.forEach { event ->
-                    i++;
+                repeat(cat.events.size) {
+                    i++
                 }
             }
         }
 
-        return -1;
+        return -1
     }
 
 }

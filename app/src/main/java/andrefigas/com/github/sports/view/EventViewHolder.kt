@@ -10,11 +10,11 @@ import androidx.core.content.ContextCompat
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.android.synthetic.main.event_item.view.*
 
-class EventViewHolder(val listener: EventAdapterListener, itemView: View) : BaseHolder<Event>(itemView), CompoundButton.OnCheckedChangeListener {
+class EventViewHolder(private val listener: EventAdapterListener, itemView: View) : BaseHolder<Event>(itemView), CompoundButton.OnCheckedChangeListener {
 
-    lateinit var event: Event;
-    lateinit var countDownTimer: CountDownTimer
-    var disposable : Disposable? = null
+    private lateinit var event: Event
+    private lateinit var countDownTimer: CountDownTimer
+    private var disposable : Disposable? = null
 
     companion object{
         const val second = 1000L
@@ -51,6 +51,7 @@ class EventViewHolder(val listener: EventAdapterListener, itemView: View) : Base
     fun getCounterLabel(milliseconds: Long) : String{
 
         val context = itemView.context
+        val resources = context.resources
 
         return when {
             milliseconds <  0 -> {
@@ -60,22 +61,28 @@ class EventViewHolder(val listener: EventAdapterListener, itemView: View) : Base
                 context.getString(R.string.now)
             }
             milliseconds < minute -> {
-                context.getString(R.string.seconds, milliseconds / second)
+                resources.getQuantityString(R.plurals.seconds,
+                    (milliseconds / second).toInt(), milliseconds / second)
             }
             milliseconds < hour -> {
-                context.getString(R.string.minutes, milliseconds / minute)
+                resources.getQuantityString(R.plurals.minutes,
+                    (milliseconds / minute).toInt(), milliseconds / minute)
             }
             milliseconds < day -> {
-                context.getString(R.string.hours, milliseconds / hour)
+                resources.getQuantityString(R.plurals.hours,
+                    (milliseconds / hour).toInt(), milliseconds / hour)
             }
             milliseconds < month -> {
-                context.getString(R.string.days, milliseconds / day)
+                context.resources.getQuantityString(R.plurals.days,
+                    (milliseconds / day).toInt(), milliseconds / day)
             }
             milliseconds < year -> {
-                context.getString(R.string.months, milliseconds / month)
+                resources.getQuantityString(R.plurals.months,
+                    (milliseconds / month).toInt(), milliseconds / month)
             }
             else -> {
-                context.getString(R.string.years, milliseconds / year)
+                resources.getQuantityString(R.plurals.years,
+                    (milliseconds / year).toInt(), milliseconds)
             }
         }
     }

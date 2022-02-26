@@ -4,9 +4,10 @@ import andrefigas.com.github.sports.model.EventsListModelContract
 import andrefigas.com.github.sports.model.di.DaggerEventListModelComponent
 import andrefigas.com.github.sports.model.entities.Event
 import andrefigas.com.github.sports.singleton.App
+import andrefigas.com.github.sports.singleton.AppContract
 import javax.inject.Inject
 
-class EventListPresenterImpl(app: App) : EventListPresenterContract {
+class EventListPresenterImpl(app: AppContract) : EventListPresenterContract {
 
     @Inject
     lateinit var model: EventsListModelContract

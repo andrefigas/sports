@@ -1,14 +1,14 @@
 package andrefigas.com.github.sports.view
 
 import andrefigas.com.github.sports.R
+import andrefigas.com.github.sports.model.entities.Category
 import andrefigas.com.github.sports.presenter.EventListPresenterContract
 import andrefigas.com.github.sports.presenter.di.DaggerEventListPresenterComponent
-import andrefigas.com.github.sports.singleton.App
+import andrefigas.com.github.sports.singleton.AppContract
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -25,15 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerEventListPresenterComponent.builder().application(application as App).build()
+        DaggerEventListPresenterComponent.builder().application(application as AppContract).build()
             .inject(this)
-
-        prepareList()
 
         requestData()
     }
 
-    private fun prepareList() {
+    private fun prepareList(categories: List<Category>) {
 
         rv_main_content.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 rv_main_content.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 //list's width / item's width
                 val columns = (rv_main_content.width.toFloat()
-                        / (resources.getDimensionPixelSize(R.dimen.item_width) ).toFloat()).toInt()
+                        / (resources.getDimensionPixelSize(R.dimen.item_width)).toFloat()).toInt()
 
                 val layoutManager = GridLayoutManager(this@MainActivity, columns)
                 layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -54,8 +52,11 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 rv_main_content.layoutManager = layoutManager
+                rv_main_content.adapter = EventsAdapter(presenter, categories)
             }
         })
+
+        rv_main_content.requestLayout()
 
 
     }
@@ -67,7 +68,9 @@ class MainActivity : AppCompatActivity() {
             .setMessage(R.string.dialog_error_body)
             .setPositiveButton(
                 R.string.dialog_error_try_again
-            ) { _, _ -> requestData() }
+            ) { _, _ ->
+                requestData()
+            }
             .setNegativeButton(R.string.dialog_error_exit) { _, _ -> finish() }
             .create().show()
     }
@@ -77,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { categories ->
-                    rv_main_content.adapter = EventsAdapter(presenter, categories)
+                    prepareList(categories)
                 }
             ) {
                 it.printStackTrace()

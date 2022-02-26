@@ -6,15 +6,15 @@ import androidx.annotation.DrawableRes
 
 object CategoryDesignUtils {
 
-    private val FOOT_ID = "FOOT"
-    private val BASK_ID = "BASK"
-    private val TENN_ID = "TENN"
-    private val TABL_ID = "TABL"
-    private val VOLL_ID = "VOLL"
-    private val ESPS_ID = "ESPS"
-    private val ICEH_ID = "ICEH"
-    private val BCHV_ID = "BCHV"
-    private val BADM_ID = "BADM"
+    private const val FOOT_ID = "FOOT"
+    private const val BASK_ID = "BASK"
+    private const val TENN_ID = "TENN"
+    private const val TABL_ID = "TABL"
+    private const val VOLL_ID = "VOLL"
+    private const val ESPS_ID = "ESPS"
+    private const val ICEH_ID = "ICEH"
+    private const val BCHV_ID = "BCHV"
+    private const val BADM_ID = "BADM"
 
     @ColorRes
     fun getColorByCategoryId(categoryId : String) : Int{

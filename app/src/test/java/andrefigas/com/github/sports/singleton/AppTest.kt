@@ -19,7 +19,7 @@ import javax.inject.Inject
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-open class AppTest() {
+class AppTest{
 
     companion object{
         lateinit var INSTANCE : AppTest
@@ -28,7 +28,6 @@ open class AppTest() {
             INSTANCE = AppTest()
             setUpRxSchedulers()
         }
-
 
         private fun setUpRxSchedulers() {
 
@@ -43,7 +42,7 @@ open class AppTest() {
 
                 override fun createWorker(): Worker {
                     return ExecutorScheduler.ExecutorWorker(
-                        Executor { obj: Runnable -> obj.run() },
+                        { obj: Runnable -> obj.run() },
                         true, false
                     )
                 }

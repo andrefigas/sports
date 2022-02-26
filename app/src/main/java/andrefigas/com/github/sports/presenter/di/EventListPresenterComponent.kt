@@ -1,6 +1,6 @@
 package andrefigas.com.github.sports.presenter.di
 
-import andrefigas.com.github.sports.singleton.App
+import andrefigas.com.github.sports.singleton.AppContract
 import andrefigas.com.github.sports.view.MainActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -16,7 +16,7 @@ interface EventListPresenterComponent {
         fun build(): EventListPresenterComponent
 
         @BindsInstance
-        fun application(app: App): Builder
+        fun application(app: AppContract): Builder
     }
 
 }

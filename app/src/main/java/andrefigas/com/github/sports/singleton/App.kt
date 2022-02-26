@@ -6,13 +6,13 @@ import andrefigas.com.github.sports.singleton.di.DaggerAppComponent
 import android.app.Application
 import javax.inject.Inject
 
-class App : Application() {
+class App : Application(), AppContract {
 
     @Inject
-    lateinit var endPoints: EndPoints
+    override lateinit var endPoints: EndPoints
 
     @Inject
-    lateinit var eventsDAOContract: EventsDAOContract
+    override lateinit var eventsDAOContract: EventsDAOContract
 
     override fun onCreate() {
         super.onCreate()

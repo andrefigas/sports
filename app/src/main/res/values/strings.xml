@@ -3,15 +3,41 @@
     <string name="starts_in">Starts in</string>
     <string name="done">done</string>
     <string name="now">now</string>
-    <string name="years">%d years</string>
-    <string name="months">%d months</string>
-    <string name="days">%d days</string>
-    <string name="hours">%d hours</string>
-    <string name="minutes">%d minutes</string>
-    <string name="seconds">%d minutes</string>
+
+    <plurals name="years">
+        <item quantity="one">%d year</item>
+        <item quantity="other">%d years</item>
+    </plurals>
+
+    <plurals name="months">
+        <item quantity="one">%d month</item>
+        <item quantity="other">%d months</item>
+    </plurals>
+
+    <plurals name="days">
+        <item quantity="one">%d day</item>
+        <item quantity="other">%d days</item>
+    </plurals>
+
+    <plurals name="hours">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+
+    <plurals name="minutes">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+
+    <plurals name="seconds">
+        <item quantity="one">%d second</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
+
     <string name="teams_separator">VS</string>
     <string name="dialog_error_title">Sorry</string>
     <string name="dialog_error_body">Oops, something goes wrong. </string>
     <string name="dialog_error_try_again">Try again</string>
     <string name="dialog_error_exit">Exit</string>
+    <string name="image_category_content_description_suffix">%s category icon</string>
 </resources>
